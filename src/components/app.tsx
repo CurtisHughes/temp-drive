@@ -8,7 +8,7 @@ import Footer from './footer';
 const App = () => (
   <Router>
     <Header />
-    <chakra.main minHeight="100vh" mx="auto" maxW="8xl">
+    <chakra.main minHeight="100vh" mx="auto">
       <Switch>
         <Route exact path={'/'} component={Home} />
         <Route exact path={'/files'} component={Files} />

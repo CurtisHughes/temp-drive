@@ -4,8 +4,8 @@ import { DiGithubBadge } from 'react-icons/di';
 
 export const Footer = () => {
   return (
-    <chakra.footer bg="#92CBC5" left="0" right="0" width="full">
-      <chakra.div height="3rem" mx="auto" maxW="8xl">
+    <chakra.footer bg="#92CBC5">
+      <chakra.div height="3rem" mx="auto">
         <Flex w="100%" h="100%" px="6" align="center" justify="space-between">
           <Flex>
             <Text color="white" fontSize="sm">

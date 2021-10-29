@@ -38,7 +38,7 @@ export const Header = () => {
       right="0"
       width="full"
     >
-      <chakra.div height="4.5rem" mx="auto" maxW="8xl">
+      <chakra.div height="4.5rem" mx="auto">
         <Flex w="100%" h="100%" px="6" align="center" justify="space-between">
           <Flex>
             <Menu>
