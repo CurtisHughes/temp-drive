@@ -48,3 +48,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 - [Prettier](https://prettier.io/) - Prettier is the formatter for the repository that makes sure the code is formatted consistently throughout the project.
 - [Husky](https://typicode.github.io/husky/#/) - Husky provides git hook callback functionality.
 - [lint-staged](https://github.com/okonet/lint-staged) - lint-staged provides a way to run linters against staged files (instead of the entire codebase every time).
+- [react-icons](https://react-icons.github.io/react-icons) - extensive icon library

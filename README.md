@@ -7,4 +7,3 @@ One of the main goals when creating Temp Drive was to **avoid annoying logins**.
 The entire project is open source and it is highly encouraged for people to [contribute](./docs/CONTRIBUTING.md), raise [issues](https://github.com/CurtisHughes/temp-drive/issues), and have [discussions](https://github.com/CurtisHughes/temp-drive/discussions).
 
 Don't trust us with your data? [Host your own solution](./docs/HOSTING.md)! We will only be slightly insulted.
-TODO: Add screenshots

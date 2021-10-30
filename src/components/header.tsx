@@ -6,11 +6,12 @@ import {
   IconButton,
   MenuList,
   MenuItem,
+  Link,
   useColorModeValue,
   Box,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link as ReactRouterLink } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useViewportScroll } from 'framer-motion';
 
@@ -44,10 +45,10 @@ export const Header = () => {
             <Menu>
               <MenuButton as={IconButton} aria-label="Options" icon={<HamburgerIcon />} />
               <MenuList>
-                <Link to="/">
+                <Link as={ReactRouterLink} to="/">
                   <MenuItem>Home</MenuItem>
                 </Link>
-                <Link to="/files">
+                <Link as={ReactRouterLink} to="/files">
                   <MenuItem>Files</MenuItem>
                 </Link>
               </MenuList>
@@ -55,7 +56,7 @@ export const Header = () => {
           </Flex>
           <Flex align="center">
             <Link to="/">
-              <Box width="2rem" height="2rem" bg="#92CBC5" borderRadius="50%" />
+              <Box width="2rem" height="2rem" bg="primary" borderRadius="50%" />
             </Link>
           </Flex>
         </Flex>

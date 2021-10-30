@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { chakra, Flex, Text, Icon } from '@chakra-ui/react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import { chakra, Flex, Text, Icon, Link } from '@chakra-ui/react';
 import { DiGithubBadge } from 'react-icons/di';
 
 export const Footer = () => {
   return (
-    <chakra.footer bg="#92CBC5">
+    <chakra.footer bg="primary">
       <chakra.div height="3rem" mx="auto">
         <Flex w="100%" h="100%" px="6" align="center" justify="space-between">
           <Flex>
@@ -13,7 +13,7 @@ export const Footer = () => {
             </Text>
           </Flex>
           <Flex>
-            <Link to="/">
+            <Link as={ReactRouterLink} to="/">
               <Icon as={DiGithubBadge} boxSize={8} color="white" />
             </Link>
           </Flex>
