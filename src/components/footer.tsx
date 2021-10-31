@@ -1,4 +1,3 @@
-import { Link as ReactRouterLink } from 'react-router-dom';
 import { chakra, Flex, Text, Icon, Link } from '@chakra-ui/react';
 import { DiGithubBadge } from 'react-icons/di';
 
@@ -13,7 +12,7 @@ export const Footer = () => {
             </Text>
           </Flex>
           <Flex>
-            <Link as={ReactRouterLink} to="/">
+            <Link href="https://github.com/CurtisHughes/temp-drive" isExternal>
               <Icon as={DiGithubBadge} boxSize={8} color="white" />
             </Link>
           </Flex>
