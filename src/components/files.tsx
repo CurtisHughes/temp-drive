@@ -1,4 +1,6 @@
-import { Flex, Heading, Stack, Box, Button, Progress } from '@chakra-ui/react';
+import { Flex, Heading, Stack, Box, Button, Progress, Icon, IconButton, Text, chakra } from '@chakra-ui/react';
+import { MdInsertDriveFile } from 'react-icons/md';
+import { FaEllipsisV } from 'react-icons/fa';
 
 export const Files = () => {
   return (
@@ -11,15 +13,37 @@ export const Files = () => {
           + New File
         </Button>
       </Flex>
-      <Stack my="7">
-        <Flex w="100%" h="40px" bg="gray.100" align="center">
-          Photos.zip
+      <Stack my="7" gridGap="7">
+        <Flex as="article" w="100%" align="center" alignItems="flex-start">
+          <Icon as={MdInsertDriveFile} boxSize={12} color="gray.700" transform="translateX(-8px)" />
+          <chakra.div width="100%" textAlign="left">
+            <Flex justifyContent="space-between" alignItems="center">
+              <chakra.span paddingRight="2">
+                <chakra.header>Photos.zip</chakra.header>
+                <Text fontSize="xs" color="gray.400" noOfLines={2}>
+                  random-random-random-random
+                </Text>
+              </chakra.span>
+              <IconButton aria-label="options" icon={<FaEllipsisV />} />
+            </Flex>
+            <Progress value={20} size="xs" colorScheme="teal" marginTop="4" />
+          </chakra.div>
         </Flex>
-        <Progress value={20} size="xs" colorScheme="teal" />
-        <Flex w="100%" h="40px" bg="gray.100" align="center">
-          Videos.zip
+        <Flex as="article" w="100%" align="center" alignItems="flex-start">
+          <Icon as={MdInsertDriveFile} boxSize={12} color="gray.700" transform="translateX(-8px)" />
+          <chakra.div width="100%" textAlign="left">
+            <Flex justifyContent="space-between" alignItems="center">
+              <chakra.span>
+                <chakra.header>Video.zip</chakra.header>
+                <Text fontSize="xs" color="gray.400" noOfLines={2}>
+                  five-random-words-to-remember
+                </Text>
+              </chakra.span>
+              <IconButton aria-label="options" icon={<FaEllipsisV />} />
+            </Flex>
+            <Progress value={60} size="xs" colorScheme="teal" marginTop="4" />
+          </chakra.div>
         </Flex>
-        <Progress value={60} size="xs" colorScheme="teal" />
       </Stack>
     </Box>
   );
