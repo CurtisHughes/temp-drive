@@ -1,1 +1,1 @@
-export { DriveList as default } from './drive-list';
+export { Drives as default } from './drives';
