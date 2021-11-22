@@ -39,8 +39,8 @@ export const Header: React.FC<HeaderProps> = ({ inverse = true }) => {
                 <Link as={ReactRouterLink} to="/">
                   <MenuItem>Home</MenuItem>
                 </Link>
-                <Link as={ReactRouterLink} to="/files">
-                  <MenuItem>Files</MenuItem>
+                <Link as={ReactRouterLink} to="/drives">
+                  <MenuItem>Drives</MenuItem>
                 </Link>
               </MenuList>
             </Menu>

@@ -1,7 +1,7 @@
 import { Flex, Heading, Box, Button, Alert, AlertIcon } from '@chakra-ui/react';
 
-import { useCreateDrive } from '../../gateways/drives';
 import DriveList from './drive-list';
+import { useCreateDrive } from '../../store/drives';
 
 export const Drives = () => {
   const [{ loading, error }, createDrive] = useCreateDrive();
