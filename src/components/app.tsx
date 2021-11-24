@@ -4,6 +4,7 @@ import { chakra } from '@chakra-ui/react';
 import Header from './header';
 import Home from './home';
 import Drives from './drives';
+import Files from './files';
 import Footer from './footer';
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
       <Switch>
         <Route exact path={'/'} component={Home} />
         <Route exact path={'/drives'} component={Drives} />
+        <Route exact path={'/drives/:driveName/files'} component={Files} />
       </Switch>
     </chakra.main>
     <Footer />

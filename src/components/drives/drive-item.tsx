@@ -1,12 +1,24 @@
 import { Flex, Progress, Icon, IconButton, Text, Menu, MenuButton, MenuList, MenuItem, chakra } from '@chakra-ui/react';
 import { FaEllipsisV } from 'react-icons/fa';
 import { FiHardDrive } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
 
 import { driveStore, Drive } from '../../store/drives';
 
 export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
+  const history = useHistory();
+
   return (
-    <Flex onClick={() => console.log('flex')} as="li" w="100%" align="center" alignItems="flex-start" cursor="pointer">
+    <Flex
+      as="li"
+      w="100%"
+      align="center"
+      alignItems="flex-start"
+      cursor="pointer"
+      onClick={() => {
+        history.push(`/drives/${drive.name}/files`);
+      }}
+    >
       <Icon as={FiHardDrive} boxSize={12} color="gray.700" />
       <chakra.div width="100%" textAlign="left" ml="3">
         <Flex justifyContent="space-between" alignItems="center">
@@ -18,7 +30,9 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
           </chakra.span>
           <Menu>
             <MenuButton
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
               as={IconButton}
               // isLoading={loading}
               aria-label="options"
@@ -33,7 +47,7 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
                   driveStore.removeDrive(drive);
                 }}
               >
-                Delete
+                Remove
               </MenuItem>
             </MenuList>
           </Menu>

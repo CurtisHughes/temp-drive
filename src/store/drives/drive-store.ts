@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { Subject, Subscription, interval } from 'rxjs';
+import { Subscription, interval, BehaviorSubject } from 'rxjs';
 
 import { Drive } from './types/Drive';
 import { calculateTimeLeftInMinutes } from './utils/calculate-time-left-in-minutes';
@@ -14,7 +14,7 @@ export const initialState: DriveStoreState = {
 };
 
 const clock = interval(1000);
-const subject = new Subject<DriveStoreState>();
+const subject = new BehaviorSubject<DriveStoreState>(initialState);
 let state = initialState;
 
 const driveStore = {
