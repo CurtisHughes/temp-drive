@@ -1,14 +1,25 @@
 import { Heading, Box, Link, Button, Text } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink, useParams } from 'react-router-dom';
+
 import { useDriveByName } from '../../store';
+import { Page } from '../page';
 
 export const Files = () => {
   let { driveName } = useParams<{ driveName: string }>();
-  const drive = useDriveByName(driveName);
+  const { value: drive, loading, error } = useDriveByName(driveName);
 
-  return drive ? (
-    <Box mx="auto" w="100%" h="100%" px="6" justify="space-between" maxW="container.xl">
+  return (
+    <Page
+      mx="auto"
+      w="100%"
+      h="100%"
+      px="6"
+      justify="space-between"
+      maxW="container.xl"
+      loading={loading}
+      error={error}
+    >
       <Link as={ReactRouterLink} to="/drives" color="white">
         <Button mt="6" variant="link" color="black" leftIcon={<ArrowBackIcon />}>
           All Drives
@@ -16,14 +27,14 @@ export const Files = () => {
       </Link>
       <Box mt="9">
         <Heading as="h1" fontSize="2xl">
-          {drive.name}
+          {drive?.name}
         </Heading>
         <Text fontSize="md" color="gray.400" noOfLines={2}>
-          {`${Math.round(drive?.timeLeftInMinutes)} minute(s) left`}
+          {`${drive && Math.round(drive.timeLeftInMinutes)} minute(s) left`}
         </Text>
       </Box>
-    </Box>
-  ) : null;
+    </Page>
+  );
 };
 
 export default Files;

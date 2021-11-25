@@ -32,6 +32,11 @@ export const Header: React.FC<HeaderProps> = ({ inverse = true }) => {
     >
       <chakra.div height="16" bg={inverse ? 'primary' : 'white'}>
         <Flex w="100%" h="100%" px="6" align="center" justify="space-between">
+          <Flex align="center">
+            <Link as={ReactRouterLink} to="/">
+              <Box width="8" height="8" bg={inverse ? 'white' : 'primary'} borderRadius="50%" />
+            </Link>
+          </Flex>
           <Flex>
             <Menu>
               <MenuButton as={IconButton} color="primary" bg="white" aria-label="Options" icon={<HamburgerIcon />} />
@@ -44,11 +49,6 @@ export const Header: React.FC<HeaderProps> = ({ inverse = true }) => {
                 </Link>
               </MenuList>
             </Menu>
-          </Flex>
-          <Flex align="center">
-            <Link to="/">
-              <Box width="8" height="8" bg={inverse ? 'white' : 'primary'} borderRadius="50%" />
-            </Link>
           </Flex>
         </Flex>
       </chakra.div>

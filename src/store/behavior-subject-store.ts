@@ -24,7 +24,7 @@ export abstract class BehaviorSubjectStore<S> {
     this._cache = cache;
   }
 
-  protected get state() {
+  public get state() {
     return this._state;
   }
 

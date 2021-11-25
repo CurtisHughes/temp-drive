@@ -2,7 +2,6 @@ import { DateTime } from 'luxon';
 import { interval, Subscription } from 'rxjs';
 
 import { BehaviorSubjectStore } from '../behavior-subject-store';
-import { generatePassphrase } from './utils/generate-passphrase';
 import { calculateTimeLeftInMinutes } from './utils/calculate-time-left-in-minutes';
 import { Drive } from './types/Drive';
 
@@ -30,20 +29,12 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
     return driveStoreSubscription;
   }
 
-  public async addDrive() {
-    const drive = await new Promise<Drive>((resolve) => {
-      const dateTime = DateTime.now();
-      setTimeout(() => {
-        resolve({
-          name: generatePassphrase(),
-          createdDateTime: dateTime.toUTC().toString(),
-          timeLeftInMinutes: 15,
-        });
-      }, 1000);
-    });
+  public async addDrive(drive: Drive) {
     this.state = {
       ...this.state,
-      drives: [...this.state.drives, drive],
+      drives: [...this.state.drives, drive].filter(
+        (drive, index, self) => self.findIndex((d) => d.name === drive.name) === index,
+      ),
     };
   }
 
@@ -52,14 +43,12 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
   }
 }
 
-export const defaultState: DriveStoreState = {
-  drives: [],
-};
-
 export default new DriveStore({
-  defaultState,
+  defaultState: {
+    drives: [],
+  },
   cache: {
-    key: '',
+    key: 'DRIVE_STORE',
     client: window.sessionStorage,
   },
 });
