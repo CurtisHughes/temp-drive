@@ -1,7 +1,7 @@
 import { Heading, Box, Link, Button, Text } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink, useParams } from 'react-router-dom';
-import { useDriveByName } from '../../store/drives';
+import { useDriveByName } from '../../store';
 
 export const Files = () => {
   let { driveName } = useParams<{ driveName: string }>();

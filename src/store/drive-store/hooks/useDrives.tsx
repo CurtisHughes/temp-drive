@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
 
-import driveStore, { DriveStoreState, initialState } from '../drive-store';
+import driveStore, { DriveStoreState, defaultState } from '../drive-store';
 
 export const useDrives = () => {
-  const [{ drives }, setDrives] = useState<DriveStoreState>(initialState);
+  const [{ drives }, setDrives] = useState<DriveStoreState>(defaultState);
 
   useLayoutEffect(() => {
     const subscription = driveStore.subscribe(setDrives);

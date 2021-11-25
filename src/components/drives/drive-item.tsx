@@ -3,7 +3,7 @@ import { FaEllipsisV } from 'react-icons/fa';
 import { FiHardDrive } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 
-import { driveStore, Drive } from '../../store/drives';
+import { driveStore, Drive } from '../../store';
 
 export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
   const history = useHistory();
