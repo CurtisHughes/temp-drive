@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 
-import { Drive } from '../types/Drive';
-import { generatePassphrase } from '../utils/generate-passphrase';
+import { Drive } from './types/Drive';
+import { generatePassphrase } from './utils/generate-passphrase';
 
 export class DriveGateway {
   public async fetchDriveByName(name: string) {
@@ -11,7 +11,6 @@ export class DriveGateway {
         resolve({
           name,
           createdDateTime: dateTime.toUTC().toString(),
-          timeLeftInMinutes: 15,
         });
       }, 1000);
     });
@@ -24,7 +23,6 @@ export class DriveGateway {
         resolve({
           name: generatePassphrase(),
           createdDateTime: dateTime.toUTC().toString(),
-          timeLeftInMinutes: 15,
         });
       }, 1000);
     });

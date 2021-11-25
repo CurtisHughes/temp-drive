@@ -1,5 +1,5 @@
-export type Drive = {
-  name: string;
-  createdDateTime: string;
+import { Drive as GatewayDrive } from '../gateways/drive-gateway/types/Drive';
+
+export type Drive = GatewayDrive & {
   timeLeftInMinutes: number;
 };
