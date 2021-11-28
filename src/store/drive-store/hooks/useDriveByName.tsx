@@ -1,22 +1,31 @@
+import { useEffect, useState } from 'react';
 import { useAsync } from 'react-use';
+import { Subscription } from 'rxjs';
 
-import driveStore from '../drive-store';
+import driveStore, { DriveStoreState } from '../drive-store';
 import { driveGateway } from '../gateways/drive-gateway';
 import { mapGatewayDriveToDrive } from '../utils/mapGatewayDriveToDrive';
-import { useDrives } from './useDrives';
 
 export const useDriveByName = (name: string) => {
-  const drives = useDrives();
+  const [{ drives }, setState] = useState<DriveStoreState>(driveStore.state);
+  const [subscription, setSubscription] = useState<Subscription>();
 
-  return useAsync(async () => {
-    let drive = drives.find((drive) => drive.name === name);
+  useEffect(() => () => subscription?.unsubscribe(), [subscription]);
+
+  const asyncState = useAsync(async () => {
+    let drive = driveStore.state.drives.find((d) => d.name === name);
 
     if (!drive) {
-      console.log(`fetching drive(${name})...`);
       const drive = await driveGateway.fetchDriveByName(name);
       await driveStore.addDrive(mapGatewayDriveToDrive(drive));
     }
 
-    return drive;
-  }, [drives]);
+    const subscription = driveStore.subscribe(setState);
+    setSubscription(subscription);
+  }, []);
+
+  return {
+    ...asyncState,
+    value: drives.find((d) => d.name === name),
+  };
 };
