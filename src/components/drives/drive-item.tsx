@@ -2,11 +2,13 @@ import { Flex, Progress, Icon, IconButton, Text, Menu, MenuButton, MenuList, Men
 import { FaEllipsisV } from 'react-icons/fa';
 import { FiHardDrive } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { driveStore, Drive } from '../../store';
 
 export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
   const history = useHistory();
+  const handleError = useErrorHandler();
 
   return (
     <Flex
@@ -42,8 +44,12 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
             <MenuList>
               <MenuItem
                 onClick={(e) => {
-                  e.stopPropagation();
-                  driveStore.removeDrive(drive);
+                  try {
+                    e.stopPropagation();
+                    driveStore.removeDrive(drive);
+                  } catch (err) {
+                    handleError(err);
+                  }
                 }}
               >
                 Remove

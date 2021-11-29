@@ -38,7 +38,7 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
     };
   }
 
-  public async removeDrive(drive: Drive) {
+  public removeDrive(drive: Drive) {
     this.state = { drives: this.state.drives.filter((d) => d.name !== drive.name) };
   }
 }
