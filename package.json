@@ -16,6 +16,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "firebase": "^9.2.0",
+    "formik": "^2.2.9",
     "framer-motion": "^4.0.0",
     "luxon": "^2.1.1",
     "react": "^17.0.2",
