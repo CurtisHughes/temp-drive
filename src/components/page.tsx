@@ -1,4 +1,4 @@
-import { Box, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Spinner } from '@chakra-ui/react';
 import { ChakraComponent } from '@chakra-ui/system';
 
 export type PageProps = {
@@ -10,7 +10,11 @@ export const Page: ChakraComponent<'div', PageProps> = ({ error, loading, childr
   if (error) {
     return <div>{error.message}</div>;
   } else if (loading) {
-    return <Spinner />;
+    return (
+      <Flex alignItems="center" justifyContent="center" height="100vh">
+        <Spinner size="xl" thickness="4px" emptyColor="gray.200" color="primary" />
+      </Flex>
+    );
   } else {
     return <Box {...props}>{children}</Box>;
   }

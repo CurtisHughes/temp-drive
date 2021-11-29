@@ -34,7 +34,6 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
                 e.stopPropagation();
               }}
               as={IconButton}
-              // isLoading={loading}
               aria-label="options"
               icon={<FaEllipsisV />}
             >
