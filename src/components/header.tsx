@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ inverse = true }) => {
           </Flex>
           <Flex>
             <Menu>
-              <MenuButton as={IconButton} color="primary" bg="white" aria-label="Options" icon={<HamburgerIcon />} />
+              <MenuButton as={IconButton} variant="outline" aria-label="Options" icon={<HamburgerIcon />} />
               <MenuList>
                 <Link as={ReactRouterLink} to="/">
                   <MenuItem>Home</MenuItem>

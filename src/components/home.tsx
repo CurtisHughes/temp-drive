@@ -20,14 +20,8 @@ export const Home = () => {
           <chakra.p color="white" fontSize="xl">
             upload, download, share. no logins required
           </chakra.p>
-          <Link as={ReactRouterLink} to="/drives" color="white">
-            <Button
-              mt="6"
-              variant="outline"
-              color="white"
-              rightIcon={<ArrowForwardIcon />}
-              _hover={{ bg: '#ffffff3d' }}
-            >
+          <Link as={ReactRouterLink} to="/drives" color="white" _hover={{ textDecoration: 'none' }}>
+            <Button mt="6" variant="outline" rightIcon={<ArrowForwardIcon />}>
               GET STARTED
             </Button>
           </Link>

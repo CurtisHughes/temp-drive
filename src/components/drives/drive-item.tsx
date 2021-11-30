@@ -57,7 +57,7 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
             </MenuList>
           </Menu>
         </Flex>
-        <Progress value={(drive.timeLeftInMinutes / 15) * 100} size="xs" colorScheme="teal" marginTop="4" />
+        <Progress value={(drive.timeLeftInMinutes / 15) * 100} size="xs" marginTop="4" />
       </chakra.div>
     </Flex>
   );

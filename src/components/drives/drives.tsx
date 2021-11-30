@@ -15,7 +15,6 @@ export const Drives = () => {
             Temporary Drives
           </Heading>
           <Button
-            color="primary"
             variant="link"
             onClick={(e) => {
               e.preventDefault();
