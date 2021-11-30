@@ -31,10 +31,9 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
     <Modal onClose={onClose} {...props}>
       <ModalOverlay />
       <Formik
-        initialValues={{ driveDuration: 15, passphraseLength: 4, creatorOnlyUploads: true }}
-        onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
-          await createDrive();
+        initialValues={{ durationInMinutes: 15, passphraseLength: 4, creatorOnlyUploads: true }}
+        onSubmit={async (options, { setSubmitting }) => {
+          await createDrive(options);
           setSubmitting(false);
           onClose();
         }}
@@ -47,31 +46,31 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
               <ModalBody>
                 <Stack spacing={6} align="stretch">
                   <Field
-                    name="driveDuration"
-                    validate={(driveDuration: number) => {
+                    name="durationInMinutes"
+                    validate={(durationInMinutes: number) => {
                       let error;
-                      if (driveDuration < 15 || driveDuration > 1440) {
+                      if (durationInMinutes < 15 || durationInMinutes > 1440) {
                         error = 'Must be a number between 15 and 1440';
                       }
                       return error;
                     }}
                   >
                     {({ field }: FieldProps) => (
-                      <FormControl isInvalid={Boolean(errors.driveDuration) && touched.driveDuration}>
-                        <FormLabel htmlFor="driveDuration">Duration (in minutes)</FormLabel>
+                      <FormControl isInvalid={Boolean(errors.durationInMinutes) && touched.durationInMinutes}>
+                        <FormLabel htmlFor="durationInMinutes">Duration (in minutes)</FormLabel>
                         <NumberSliderInput
                           {...field}
-                          id="driveDuration"
+                          id="durationInMinutes"
                           isDisabled={isSubmitting}
                           min={15}
                           max={1440}
                           step={15}
                           onChange={(v) => {
-                            setFieldValue('driveDuration', Number(v));
-                            setFieldTouched('driveDuration');
+                            setFieldValue('durationInMinutes', Number(v));
+                            setFieldTouched('durationInMinutes');
                           }}
                         />
-                        <FormErrorMessage>{errors.driveDuration}</FormErrorMessage>
+                        <FormErrorMessage>{errors.durationInMinutes}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>

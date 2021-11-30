@@ -1,9 +1,8 @@
-import { DateTime } from 'luxon';
 import { interval, Subscription } from 'rxjs';
 
 import { BehaviorSubjectStore } from '../behavior-subject-store';
-import { calculateTimeLeftInMinutes } from './utils/calculate-time-left-in-minutes';
 import { Drive } from './types/Drive';
+import { mapGatewayDriveToDrive } from './utils/mapGatewayDriveToDrive';
 
 export type DriveStoreState = {
   drives: Drive[];
@@ -18,10 +17,7 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
       this.state = {
         ...this.state,
         drives: this.state.drives
-          .map((drive) => ({
-            ...drive,
-            timeLeftInMinutes: calculateTimeLeftInMinutes(DateTime.fromISO(drive.createdDateTime), DateTime.now()),
-          }))
+          .map((drive) => mapGatewayDriveToDrive(drive))
           .filter((drive) => drive.timeLeftInMinutes > 0),
       };
     });
