@@ -18,7 +18,7 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
         ...this.state,
         drives: this.state.drives
           .map((drive) => mapGatewayDriveToDrive(drive))
-          .filter((drive) => drive.timeLeftInMinutes > 0),
+          .filter((drive) => drive.timeLeft.percent > 0),
       };
     });
     driveStoreSubscription.add(clockSubscription);

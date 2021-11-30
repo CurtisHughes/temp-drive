@@ -7,12 +7,15 @@ export const mapGatewayDriveToDrive = (drive: GatewayDrive): Drive => {
   const createdDateTime = DateTime.fromISO(drive.createdDateTime).toUTC();
   const expirationDateTime = DateTime.fromISO(drive.expirationDateTime).toUTC();
 
-  const timeLeftInMinutes = expirationDateTime.diffNow('minutes').minutes;
-  const timeLeftInPercent = (timeLeftInMinutes / expirationDateTime.diff(createdDateTime, 'minutes').minutes) * 100;
+  const timeLeft = expirationDateTime.diffNow(['hours', 'minutes', 'seconds']);
+  const timeLeftInPercent =
+    (timeLeft.as('seconds') / expirationDateTime.diff(createdDateTime, 'seconds').seconds) * 100;
 
   return {
     ...drive,
-    timeLeftInMinutes,
-    timeLeftInPercent,
+    timeLeft: {
+      ...timeLeft.toObject(),
+      percent: timeLeftInPercent,
+    },
   };
 };

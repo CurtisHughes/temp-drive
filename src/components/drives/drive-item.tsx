@@ -4,7 +4,7 @@ import { FiHardDrive } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { driveStore, Drive } from '../../store';
+import { driveStore, Drive, formatDriveTimeLeft } from '../../store';
 
 export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
   const history = useHistory();
@@ -27,7 +27,7 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
           <chakra.span paddingRight="2">
             <chakra.header>{drive.name}</chakra.header>
             <Text fontSize="xs" color="gray.400" noOfLines={2}>
-              {`${Math.round(drive.timeLeftInMinutes)} minute(s) left`}
+              {formatDriveTimeLeft(drive)}
             </Text>
           </chakra.span>
           <Menu>
@@ -57,7 +57,7 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
             </MenuList>
           </Menu>
         </Flex>
-        <Progress value={drive.timeLeftInPercent} size="xs" marginTop="4" />
+        <Progress value={drive.timeLeft.percent} size="xs" marginTop="4" />
       </chakra.div>
     </Flex>
   );

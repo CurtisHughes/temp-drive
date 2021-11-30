@@ -2,7 +2,7 @@ import { Heading, Box, Link, Button, Text } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink, useParams } from 'react-router-dom';
 
-import { useDriveByName } from '../../store';
+import { formatDriveTimeLeft, useDriveByName } from '../../store';
 import { Page } from '../page';
 
 export const Files = () => {
@@ -30,7 +30,7 @@ export const Files = () => {
           {drive?.name}
         </Heading>
         <Text fontSize="md" color="gray.400" noOfLines={2}>
-          {`${drive && Math.round(drive.timeLeftInMinutes)} minute(s) left`}
+          {drive && formatDriveTimeLeft(drive)}
         </Text>
       </Box>
     </Page>
