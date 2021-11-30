@@ -62,7 +62,8 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                         <NumberSliderInput
                           {...field}
                           id="driveDuration"
-                          min={0}
+                          isDisabled={isSubmitting}
+                          min={15}
                           max={1440}
                           step={15}
                           onChange={(v) => {
@@ -91,6 +92,7 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                         <NumberSliderInput
                           {...field}
                           id="passphraseLength"
+                          isDisabled={isSubmitting}
                           min={4}
                           max={15}
                           step={1}
@@ -107,7 +109,7 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                   <Field name="creatorOnlyUploads">
                     {({ field }: FieldProps) => (
                       <FormControl>
-                        <Checkbox {...field} id="creatorOnlyUploads" defaultIsChecked>
+                        <Checkbox {...field} id="creatorOnlyUploads" defaultIsChecked isDisabled={isSubmitting}>
                           Creator only uploads
                         </Checkbox>
                         <FormErrorMessage>{errors.creatorOnlyUploads}</FormErrorMessage>
@@ -117,10 +119,10 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                 </Stack>
               </ModalBody>
               <ModalFooter>
-                <Button variant="ghost" mr={3} onClick={onClose}>
+                <Button variant="ghost" mr={3} onClick={onClose} disabled={isSubmitting}>
                   Cancel
                 </Button>
-                <Button type="submit" backgroundColor="primary" color="white" disabled={!isValid || isSubmitting}>
+                <Button type="submit" variant="solid" isLoading={isSubmitting} disabled={!isValid || isSubmitting}>
                   Create Drive
                 </Button>
               </ModalFooter>
