@@ -23,7 +23,9 @@ import { NumberSliderInput } from './number-slider-input';
 type CreateDriveModalFormProps = Omit<ModalProps, 'children'> & {};
 
 export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onClose, ...props }) => {
-  const [{ error }, createDrive] = useCreateDrive();
+  const [{ loading, error }, createDrive] = useCreateDrive({
+    onComplete: () => onClose(),
+  });
 
   useErrorHandler(error);
 
@@ -32,13 +34,9 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
       <ModalOverlay />
       <Formik
         initialValues={{ durationInMinutes: 15, passphraseLength: 4, creatorOnlyUploads: true }}
-        onSubmit={async (options, { setSubmitting }) => {
-          await createDrive(options);
-          setSubmitting(false);
-          onClose();
-        }}
+        onSubmit={(options) => createDrive(options)}
       >
-        {({ setFieldValue, isSubmitting, errors, touched, isValid, setFieldTouched }) => (
+        {({ setFieldValue, errors, touched, isValid, setFieldTouched }) => (
           <Form>
             <ModalContent>
               <ModalHeader>Drive Settings</ModalHeader>
@@ -61,7 +59,7 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                         <NumberSliderInput
                           {...field}
                           id="durationInMinutes"
-                          isDisabled={isSubmitting}
+                          isDisabled={loading}
                           min={15}
                           max={1440}
                           step={15}
@@ -74,7 +72,6 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                       </FormControl>
                     )}
                   </Field>
-
                   <Field
                     name="passphraseLength"
                     validate={(passphraseLength: number) => {
@@ -91,7 +88,7 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                         <NumberSliderInput
                           {...field}
                           id="passphraseLength"
-                          isDisabled={isSubmitting}
+                          isDisabled={loading}
                           min={4}
                           max={15}
                           step={1}
@@ -104,11 +101,10 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                       </FormControl>
                     )}
                   </Field>
-
                   <Field name="creatorOnlyUploads">
                     {({ field }: FieldProps) => (
                       <FormControl>
-                        <Checkbox {...field} id="creatorOnlyUploads" defaultIsChecked isDisabled={isSubmitting}>
+                        <Checkbox {...field} id="creatorOnlyUploads" defaultIsChecked isDisabled={loading}>
                           Creator only uploads
                         </Checkbox>
                         <FormErrorMessage>{errors.creatorOnlyUploads}</FormErrorMessage>
@@ -118,10 +114,10 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
                 </Stack>
               </ModalBody>
               <ModalFooter>
-                <Button variant="ghost" mr={3} onClick={onClose} disabled={isSubmitting}>
+                <Button variant="ghost" mr={3} onClick={onClose} disabled={loading}>
                   Cancel
                 </Button>
-                <Button type="submit" variant="solid" isLoading={isSubmitting} disabled={!isValid || isSubmitting}>
+                <Button type="submit" variant="solid" isLoading={loading} disabled={!isValid || loading}>
                   Create Drive
                 </Button>
               </ModalFooter>
