@@ -25,7 +25,7 @@ export class DriveGateway {
             expirationDateTime: DateTime.now().plus({ minutes: 15 }).toUTC().toString(),
           });
         }
-      }, 5000);
+      }, 1000);
     });
   }
 

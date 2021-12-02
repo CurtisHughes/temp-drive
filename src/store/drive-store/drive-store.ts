@@ -1,4 +1,4 @@
-import { interval, Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 import { BehaviorSubjectStore } from '../behavior-subject-store';
 import { Drive } from './types/Drive';
@@ -9,7 +9,7 @@ export type DriveStoreState = {
 };
 
 export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
-  private _clock = interval(1000);
+  private _clock = timer(0, 1000);
 
   public subscribe(setState: React.Dispatch<React.SetStateAction<DriveStoreState>>) {
     const driveStoreSubscription: Subscription = this.subject.subscribe(setState);
