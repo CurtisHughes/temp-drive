@@ -28,9 +28,7 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
   public async addDrive(drive: Drive) {
     this.state = {
       ...this.state,
-      drives: [...this.state.drives, drive].filter(
-        (drive, index, self) => self.findIndex((d) => d.name === drive.name) === index,
-      ),
+      drives: [...this.state.drives.filter((d) => d.name !== drive.name), drive],
     };
   }
 

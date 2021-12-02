@@ -1,25 +1,19 @@
-import { Heading, Box, Link, Button, Text } from '@chakra-ui/react';
+import { Heading, Box, Link, Button, Text, Stack } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink, useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { formatDriveTimeLeft, useDriveByName } from '../../store';
-import { Page } from '../page';
+import FileItem from './file-item';
 
 export const Files = () => {
   let { driveName } = useParams<{ driveName: string }>();
   const { value: drive, loading, error } = useDriveByName(driveName);
 
+  useErrorHandler(error);
+
   return (
-    <Page
-      mx="auto"
-      w="100%"
-      h="100%"
-      px="6"
-      justify="space-between"
-      maxW="container.xl"
-      loading={loading}
-      error={error}
-    >
+    <Box mx="auto" w="100%" h="100%" px="6" justify="space-between" maxW="container.xl">
       <Link as={ReactRouterLink} to="/drives" color="white">
         <Button mt="6" variant="link" color="black" leftIcon={<ArrowBackIcon />}>
           All Drives
@@ -32,8 +26,14 @@ export const Files = () => {
         <Text fontSize="md" color="gray.400" noOfLines={2}>
           {drive && formatDriveTimeLeft(drive)}
         </Text>
+        <Stack as="ul" my="7" gridGap="7">
+          {drive?.files.map((file) => (
+            <FileItem file={file} key={file.name} />
+          ))}
+        </Stack>
+        {loading && 'loading...'}
       </Box>
-    </Page>
+    </Box>
   );
 };
 

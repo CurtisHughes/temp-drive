@@ -7,7 +7,6 @@ export const useDrives = () => {
 
   useLayoutEffect(() => {
     const subscription = driveStore.subscribe(setDrives);
-
     return () => {
       subscription.unsubscribe();
     };
