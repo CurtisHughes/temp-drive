@@ -28,7 +28,9 @@ export class DriveStore extends BehaviorSubjectStore<DriveStoreState> {
   public async addDrive(drive: Drive) {
     this.state = {
       ...this.state,
-      drives: [...this.state.drives.filter((d) => d.name !== drive.name), drive],
+      drives: [...this.state.drives.filter((d) => d.name !== drive.name), drive].sort(
+        (a, b) => a.timeLeft.percent - b.timeLeft.percent,
+      ),
     };
   }
 

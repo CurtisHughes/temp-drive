@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/react';
 
-import { DriveItem } from './drive-item';
 import { useDrives } from '../../store';
+import { DriveItem } from './drive-item';
 
 export const DriveList = () => {
   const drives = useDrives();

@@ -62,3 +62,5 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
     </Flex>
   );
 };
+
+export default DriveItem;
