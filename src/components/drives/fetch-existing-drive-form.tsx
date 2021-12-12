@@ -5,32 +5,35 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 import { useFetchDriveByName } from '../../store/drive-store/hooks/useFetchDriveByName';
 
-export const AddExistingDriveForm = () => {
-  const [{ loading, error }, fetchDrive] = useFetchDriveByName({
+export const FetchExistingDriveForm = () => {
+  const [{ loading, error }, fetchDriveByName] = useFetchDriveByName({
     onComplete: () => console.log('complete'),
   });
 
   useErrorHandler(error);
 
   return (
-    <Formik initialValues={{ existingDrive: '' }} onSubmit={({ existingDrive }) => fetchDrive(existingDrive)}>
+    <Formik
+      initialValues={{ existingDriveName: '' }}
+      onSubmit={({ existingDriveName }) => fetchDriveByName(existingDriveName)}
+    >
       {({ errors, isValid }) => (
         <Form>
           <Flex as="li" w="100%" my="7" align="center" justify="center" alignItems="start">
             <Field
-              name="existingDrive"
-              validate={(existingDrive: string) => {
+              name="existingDriveName"
+              validate={(existingDriveName: string) => {
                 let error;
-                if (!/^[a-z-]*$/i.test(existingDrive)) {
+                if (!/^[a-z-]*$/i.test(existingDriveName)) {
                   error = 'Invalid drive name!';
                 }
                 return error;
               }}
             >
               {({ field }: FieldProps) => (
-                <FormControl isInvalid={Boolean(errors.existingDrive)} mr="3">
-                  <Input {...field} id="existingDrive" variant="filled" placeholder="existing-drive-name" />
-                  <FormErrorMessage>{errors.existingDrive}</FormErrorMessage>
+                <FormControl isInvalid={Boolean(errors.existingDriveName)} mr="3">
+                  <Input {...field} id="existingDriveName" variant="filled" placeholder="existing-drive-name" />
+                  <FormErrorMessage>{errors.existingDriveName}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
@@ -48,4 +51,4 @@ export const AddExistingDriveForm = () => {
   );
 };
 
-export default AddExistingDriveForm;
+export default FetchExistingDriveForm;

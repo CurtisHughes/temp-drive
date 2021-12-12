@@ -2,7 +2,7 @@ import { Flex, Heading, Box, Button } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/hooks';
 
 import { CreateDriveModalForm } from './create-drive-modal-form';
-import AddExistingDriveForm from './add-existing-drive-form';
+import FetchExistingDriveForm from './fetch-existing-drive-form';
 import DriveList from './drive-list';
 
 export const Drives = () => {
@@ -25,7 +25,7 @@ export const Drives = () => {
             + New Drive
           </Button>
         </Flex>
-        <AddExistingDriveForm />
+        <FetchExistingDriveForm />
         <DriveList />
       </Box>
       <CreateDriveModalForm isOpen={isOpen} onClose={onClose} />
