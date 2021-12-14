@@ -27,7 +27,13 @@ export const FetchExistingDriveForm = () => (
           >
             {({ field }: FieldProps) => (
               <FormControl isInvalid={Boolean(errors.existingDriveName)} mr="3">
-                <Input {...field} id="existingDriveName" variant="filled" placeholder="existing-drive-name" />
+                <Input
+                  {...field}
+                  id="existingDriveName"
+                  variant="filled"
+                  placeholder="existing-drive-name"
+                  autoComplete="off"
+                />
                 <FormErrorMessage>{errors.existingDriveName}</FormErrorMessage>
               </FormControl>
             )}
