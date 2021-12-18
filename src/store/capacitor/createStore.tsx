@@ -1,4 +1,4 @@
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export type Context<S> = {
   state: S;
@@ -9,42 +9,40 @@ export type Plugin<S> = (state: S) => void;
 
 export type Action<S> = (context: Context<S>, payload: any) => Promise<void> | void;
 
-export type Mutation<S> = (state: S, payload: any) => S;
+export type Mutation<S> = (state: S, payload?: any) => S;
 
 export type Store<S> = {
   state: S;
   actions: Record<string, Action<S>>;
   mutations: Record<string, Mutation<S>>;
-  plugins: Plugin<S>[];
+  plugins: Plugin<{ mutation: { type: string; payload: any }; state: S }>[];
 };
 
 export function createStore<S>({ state, actions, mutations, plugins }: Store<S>) {
-  const subject: BehaviorSubject<S> = new BehaviorSubject(state);
+  const stateSubject: BehaviorSubject<S> = new BehaviorSubject(state);
+  const commitSubject: Subject<{ mutation: { type: string; payload: any }; state: S }> = new Subject();
 
-  const destroy = plugins.reduce((acc: Subscription | null, plugin) => {
-    if (!acc) {
-      acc = subject.subscribe(plugin);
-    } else {
-      acc.add(subject.subscribe(plugin));
-    }
-    return acc;
-  }, null);
-
-  const commit = (mutation: string, payload: any) => {
-    const value = mutations[mutation](subject.value, payload);
-    subject.next(value);
+  const commit = (type: string, payload?: any) => {
+    const state = mutations[type](stateSubject.value, payload);
+    commitSubject.next({
+      state,
+      mutation: {
+        type,
+        payload,
+      },
+    });
   };
 
   const dispatch = async (action: string, payload: any) => {
-    return await actions[action]({ commit, state: subject.value }, payload);
+    return await actions[action]({ commit, state: stateSubject.value }, payload);
   };
 
+  commitSubject.subscribe(({ state }) => stateSubject.next(state));
+  plugins.forEach((plugin) => commitSubject.subscribe(plugin));
+
   return {
-    subject,
-    subscribe: subject.subscribe,
-    destroy,
+    state: stateSubject,
     dispatch,
     commit,
-    // useState?
   };
 }
