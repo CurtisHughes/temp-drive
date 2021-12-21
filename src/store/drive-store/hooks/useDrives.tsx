@@ -3,6 +3,7 @@ import { timer } from 'rxjs';
 
 import { Drive } from '../types/Drive';
 import driveStore from '../drive-store';
+import { REFRESH } from '../actions';
 
 const _clock = timer(0, 1000);
 
@@ -14,7 +15,7 @@ export const useDrives = () => {
 
     subscription.add(
       _clock.subscribe(() => {
-        driveStore.commit('REFRESH');
+        driveStore.commit(REFRESH);
       }),
     );
     return () => {

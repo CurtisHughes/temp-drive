@@ -2,12 +2,13 @@ import { useAsync } from 'react-use';
 
 import { useDrives } from './useDrives';
 import driveStore from '../drive-store';
+import { FETCH } from '../mutations';
 
 export const useDriveByName = (name: string) => {
   const drives = useDrives();
 
   const asyncState = useAsync(async () => {
-    await driveStore.dispatch('FETCH', name);
+    await driveStore.dispatch(FETCH, name);
   }, [name]);
 
   return {

@@ -4,7 +4,7 @@ import { FiHardDrive } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { driveStore, Drive, formatDriveTimeLeft } from '../../store';
+import { driveStore, Drive, formatDriveTimeLeft, actions } from '../../store';
 
 export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
   const history = useHistory();
@@ -46,7 +46,7 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
                 onClick={(e) => {
                   try {
                     e.stopPropagation();
-                    driveStore.commit('REMOVE', drive);
+                    driveStore.commit(actions.REMOVE, drive);
                   } catch (err) {
                     handleError(err);
                   }

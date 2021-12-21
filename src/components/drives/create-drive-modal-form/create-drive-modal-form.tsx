@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form, Field, FieldProps } from 'formik';
 
-import { driveStore } from '../../../store/drive-store';
+import { driveStore, mutations } from '../../../store/drive-store';
 import { NumberSliderInput } from './number-slider-input';
 
 type CreateDriveModalFormProps = Omit<ModalProps, 'children'> & {};
@@ -27,7 +27,7 @@ export const CreateDriveModalForm: React.FC<CreateDriveModalFormProps> = ({ onCl
     <Formik
       initialValues={{ durationInMinutes: 15, passphraseLength: 4, creatorOnlyUploads: true }}
       onSubmit={async (options) => {
-        await driveStore.dispatch('CREATE', options);
+        await driveStore.dispatch(mutations.CREATE, options);
         onClose();
       }}
     >
