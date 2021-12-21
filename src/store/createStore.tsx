@@ -11,14 +11,20 @@ export type Action<S> = (context: Context<S>, payload: any) => Promise<void> | v
 
 export type Mutation<S> = (state: S, payload?: any) => S;
 
-export type Store<S> = {
+export type StoreProps<S> = {
   state: S;
   actions: Record<string, Action<S>>;
   mutations: Record<string, Mutation<S>>;
   plugins: Plugin<{ mutation: { type: string; payload: any }; state: S }>[];
 };
 
-export function createStore<S>({ state, actions, mutations, plugins }: Store<S>) {
+export type Store<T> = {
+  state: BehaviorSubject<T>;
+  dispatch: (action: string, payload?: any) => Promise<void>;
+  commit: (type: string, payload?: any) => void;
+};
+
+export function createStore<S>({ state, actions, mutations, plugins }: StoreProps<S>): Store<S> {
   const stateSubject: BehaviorSubject<S> = new BehaviorSubject(state);
   const commitSubject: Subject<{ mutation: { type: string; payload: any }; state: S }> = new Subject();
 
@@ -33,7 +39,7 @@ export function createStore<S>({ state, actions, mutations, plugins }: Store<S>)
     });
   };
 
-  const dispatch = async (action: string, payload: any) => {
+  const dispatch = async (action: string, payload?: any) => {
     return await actions[action]({ commit, state: stateSubject.value }, payload);
   };
 

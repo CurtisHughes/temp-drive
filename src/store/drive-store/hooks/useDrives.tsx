@@ -1,12 +1,22 @@
 import { useLayoutEffect, useState } from 'react';
+import { timer } from 'rxjs';
 
-import driveStore, { DriveStoreState } from '../drive-store';
+import { Drive } from '../types/Drive';
+import driveStore from '../drive-store';
+
+const _clock = timer(0, 1000);
 
 export const useDrives = () => {
-  const [{ drives }, setDrives] = useState<DriveStoreState>(driveStore.state);
+  const [drives, setDrives] = useState<Drive[]>([]);
 
   useLayoutEffect(() => {
-    const subscription = driveStore.subscribe(setDrives);
+    const subscription = driveStore.state.subscribe(setDrives);
+
+    subscription.add(
+      _clock.subscribe(() => {
+        driveStore.commit('REFRESH');
+      }),
+    );
     return () => {
       subscription.unsubscribe();
     };

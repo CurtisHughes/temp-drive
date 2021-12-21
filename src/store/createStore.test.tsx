@@ -1,7 +1,7 @@
-import { createStore, Store } from './createStore';
+import { createStore, StoreProps } from './createStore';
 
 describe('createStore', () => {
-  let params: Store<any>;
+  let params: StoreProps<any>;
 
   beforeEach(() => {
     params = {

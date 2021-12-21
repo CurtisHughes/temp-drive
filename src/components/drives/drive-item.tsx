@@ -46,7 +46,7 @@ export const DriveItem: React.FC<{ drive: Drive }> = ({ drive }) => {
                 onClick={(e) => {
                   try {
                     e.stopPropagation();
-                    driveStore.removeDrive(drive);
+                    driveStore.commit('REMOVE', drive);
                   } catch (err) {
                     handleError(err);
                   }
