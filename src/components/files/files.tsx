@@ -3,7 +3,8 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink, useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { formatDriveTimeLeft, useDriveByName } from '../../store';
+import { formatDriveTimeLeft } from '../../store';
+import { useDriveByName } from '../../store/drive-store/hooks/useDriveByName';
 import FileItem from './file-item';
 
 export const Files = () => {

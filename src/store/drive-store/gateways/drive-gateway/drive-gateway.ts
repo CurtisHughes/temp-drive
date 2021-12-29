@@ -6,11 +6,11 @@ import { generatePassphrase } from './utils/generate-passphrase';
 
 export class DriveGateway {
   public async fetchDriveByName(name: string) {
-    return await new Promise<Drive>((resolve) => {
+    return await new Promise<Drive>((resolve, reject) => {
       setTimeout(() => {
         const serializedCachedState = window.sessionStorage.getItem('DRIVE_STORE');
-        const state = serializedCachedState ? JSON.parse(serializedCachedState) : { drives: [] };
-        const drive = state.drives.find((s: Drive) => s.name === name);
+        const state = serializedCachedState ? JSON.parse(serializedCachedState) : [];
+        const drive = state.find((s: Drive) => s.name === name);
 
         if (drive) {
           resolve(drive);

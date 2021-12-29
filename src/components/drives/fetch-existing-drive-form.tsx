@@ -2,13 +2,14 @@ import { Flex, Input, IconButton, FormControl, FormErrorMessage } from '@chakra-
 import { Formik, Form, Field, FieldProps } from 'formik';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-import { actions } from '../../store/drive-store';
+import { driveStore, actions } from '../../store/drive-store';
+import { FetchAction } from '../../store/drive-store/actions';
 
 export const FetchExistingDriveForm = () => (
   <Formik
     initialValues={{ existingDriveName: '' }}
     onSubmit={async ({ existingDriveName }, { setFieldValue }) => {
-      await actions.fetchDriveByName(existingDriveName);
+      await driveStore.dispatch<FetchAction>({ type: actions.FETCH, payload: existingDriveName });
       setFieldValue('existingDriveName', '');
     }}
   >
