@@ -12,7 +12,7 @@ const initialState = persistentState ? JSON.parse(persistentState) : [];
 
 export type DriveStoreState = Drive[];
 
-export default createStore<DriveStoreState>({
+export const { dispatch, commit, state } = createStore<DriveStoreState>({
   state: initialState,
   actions: {
     [FETCH]: async ({ commit }, payload: FetchAction['payload']) => {
