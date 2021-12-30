@@ -12,5 +12,10 @@
   },
   "storage": {
     "rules": "firebase.storage.rules"
+  },
+  "functions": {
+    "predeploy": "yarn workspace temp-drive-backend build",
+    "source": "backend",
+    "runtime": "nodejs16"
   }
 }
