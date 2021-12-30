@@ -12,10 +12,12 @@ const authClient = new GoogleAuth({
 
 export const billingManager = pubsub.topic('billing').onPublish(async ({ json: { costAmount, budgetAmount } }) => {
   if (costAmount > budgetAmount) {
-    logger.warn(`Budget exceeded (Current cost: ${costAmount})! Attempting to disable billing...`);
+    logger.warn(
+      `Current cost ($${costAmount}) exceeds budget amount ($${budgetAmount})! Attempting to disable billing...`,
+    );
     await _disableBillingForProject(PROJECT_NAME);
   } else {
-    logger.warn(`No action necessary. (Current cost: ${costAmount})`);
+    logger.warn(`Current cost ($${costAmount}) is less than budget amount ($${budgetAmount}). No action necessary.`);
   }
 });
 
